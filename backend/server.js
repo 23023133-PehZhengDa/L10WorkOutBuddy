@@ -13,7 +13,9 @@ const mongoose = require("mongoose");
 // Require routes
 const workoutRoutes = require("./routes/workouts");
 
-const cors = require("cors");
+const cors = require("cors")
+
+
 // Set up the express app
 const app = express();
 
@@ -37,6 +39,12 @@ app.use((req, res, next) => {
 // workoutRoutes is triggered when we make a request to /api/workouts
 app.use("/api/workouts", workoutRoutes);
 
+
+app.get("/api/workouts", (req, res) => {
+  res.json({ message: 'Hello from the backend!' });
+});
+
+
 // Connect to DB
 mongoose
   .connect(process.env.MONGO_URI)
@@ -49,3 +57,6 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+
+  
