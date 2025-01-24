@@ -15,13 +15,11 @@ const WorkoutForm = () => {
 
         const workout = {title, load, reps}
 
-        const response = await fetch(`${process.env.REACT_APP_API_URL}api/workouts`, {
-            method: 'POST',
+        const response = await fetch("https://l10workoutbuddy-backend-4sqs.onrender.com/api/workouts", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(workout),
-            headers: {
-              'Content-Type': 'application/json'
-            }
-        })
+          });
         const json = await response.json()
 
         if (!response.ok) {
