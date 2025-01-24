@@ -12,16 +12,16 @@ const router = express.Router();
 // Get all workouts
 router.get("/", getWorkouts);
 
-// Get a single workout by ID
+// Get a single workout
 router.get("/:id", getWorkout);
 
-// Create a new workout
+// Post a new workout
 router.post("/", createWorkout);
 
-// Delete a workout by ID
+// Delete a workout
 router.delete("/:id", deleteWorkout);
 
-// Update a workout by ID
+// Update a workout
 router.patch("/:id", updateWorkout);
 
 module.exports = router;
