@@ -19,7 +19,7 @@ const WorkoutForm = () => {
             method: 'POST',
             body: JSON.stringify(workout),
             headers: {
-                'Content-Type': 'application/json'
+              'Content-Type': 'application/json'
             }
         })
         const json = await response.json()
