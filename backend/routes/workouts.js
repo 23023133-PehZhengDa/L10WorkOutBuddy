@@ -1,38 +1,32 @@
-import { Link } from 'react-router-dom'
-import { useLogout } from '../hooks/useLogout'
-import { useAuthContext } from '../hooks/useAuthContext'
+const express = require('express')
+const {
+  createWorkout,
+  getWorkouts,
+  getWorkout,
+  deleteWorkout,
+  updateWorkout
+} = require('../controllers/workoutController')
+const requireAuth = require('../middleware/requireAuth')
 
-const Navbar = () => {
-  const { logout } = useLogout()
-  const { user } = useAuthContext()
+const router = express.Router()
 
-  const handleClick = () => {
-    logout()
-  }
+// require auth for all workout routes
+router.use(requireAuth)
 
-  return (
-    <header>
-      <div className="container">
-        <Link to="/">
-          <h1>Workout Buddy</h1>
-        </Link>
-        <nav>
-          {user && (
-            <div>
-              <span>{user.email}</span>
-              <button onClick={handleClick}>Log out</button>
-            </div>
-          )}
-          {!user && (
-            <div>
-              <Link to="/login">Login</Link>
-              <Link to="/signup">Signup</Link>
-            </div>
-          )}
-        </nav>
-      </div>
-    </header>
-  )
-}
+// GET all workouts
+router.get('/', getWorkouts)
 
-export default Navbar
+//GET a single workout
+router.get('/:id', getWorkout)
+
+// POST a new workout
+router.post('/', createWorkout)
+
+// DELETE a workout
+router.delete('/:id', deleteWorkout)
+
+// UPDATE a workout
+router.patch('/:id', updateWorkout)
+
+
+module.exports = router
